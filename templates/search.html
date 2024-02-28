@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <title>Search: {% data.query %}</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/search.css') }}"/>
+    </head>
+    <body>
+        <h1>SourceFinder</h1>
+        <ul>
+            {% for item in data.objects %}
+                <h2><a href="{{item.url}}">{{item.name}}</a></h2>
+                <h3>{{item.source}}</h3>
+                <a href="{{item.sci_hub}}">Sci-Hub</a>
+            {% endfor %}
+        </ul>
+
+
+        <script src="{{ url_for('static', filename='js/search.js') }}"></script>
+    </body>
+</html>
+
+<!-- {query: "test", objects: [{name: test, source: (jstor, etc), url: url, sci_hub: url}, etc] }-->

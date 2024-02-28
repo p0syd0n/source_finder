@@ -1,0 +1,40 @@
+
+html {
+    background-color: #7D83B0;
+}
+form, h1 {
+    width: 50%; /* Adjust the width as needed */
+    margin: auto;
+    text-align: center;
+}
+
+form{
+    height: 50%;
+    line-height: 50px; /* This should match the height of your form */
+    border: 5px solid #080E3B;
+    background-color: 535A92;
+}
+
+input {
+    margin-top: 20%;
+    background-color: #535A92;
+    color: white;
+    outline: none;
+}
+
+button {
+    margin-top: 5px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #181F58;
+    color: #535A92;
+}
+
+.form_container {
+    display: grid;
+    place-items: center;
+    min-height: 100vh; /* Ensures the container takes up at least the full height of the viewport */
+    
+}
+

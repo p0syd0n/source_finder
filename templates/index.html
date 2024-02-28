@@ -1,0 +1,18 @@
+<html>
+    <head>
+        <title>Index</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}"/>
+    </head>
+    <body>
+        <h1>SourceFinder</h1>
+        <div class="form_container">
+            <form method="GET" action="/search">
+                <input id="input" name="query" placeholder="search. . ." autofocus></input>
+                <br>
+                <button type="submit">Go</button>
+            </form>
+        </div>
+
+        <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+    </body>
+</html>
