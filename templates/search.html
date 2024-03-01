@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Search: {% data.query %}</title>
+        <title>Search: {{ data.query }}</title>
         <link rel="stylesheet" href="{{ url_for('static', filename='css/search.css') }}"/>
     </head>
     <body>
@@ -9,7 +9,11 @@
             {% for item in data.objects %}
                 <h2><a href="{{item.url}}">{{item.name}}</a></h2>
                 <h3>{{item.source}}</h3>
-                <a href="{{item.sci_hub}}">Sci-Hub</a>
+                {% if item.sci_hub != "": %}
+
+                    <a href="{{item.sci_hub}}">Sci-Hub</a>
+                {% endif %}
+                <p>{{item.abstract}}</p>
             {% endfor %}
         </ul>
 

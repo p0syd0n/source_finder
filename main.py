@@ -2,9 +2,13 @@ from flask import Flask, render_template, request
 import os
 from bs4 import BeautifulSoup
 import requests
-import scholarly
+import json
+from scholarly import scholarly
+import re
 
 app = Flask(__name__)
+SCI_HUB = '/sci-hub' # 'https://sci-hub.yncjkj.com/'
+SCHOLAR_MAX = 10
 
 def search(query):
     headers = {
@@ -31,16 +35,77 @@ def search_():
     engine = request.args["engine"]
     return "test"
 
+@app.route('/blend')
+def blend():
+    query = request.args['query']
+    if not query:
+        return 'Query not found. Go back and try again'
+
+    # Google Scholar Data
+
+    # raw data
+
+    try:
+
+        raw_scholar = scholarly.search_pubs(query)
+    except:
+        return render_template("not_available.html", data=json.loads(json.dumps({'feature_name': 'Blend Search', 'details': 'Google Scholar error'})))
+    scholar_objects = []
+
+    # iterating over objects in the response
+
+    articles = 0
+    for item in raw_scholar:
+        if articles == SCHOLAR_MAX:
+            break
+        try:
+
+            # finding a DOI
+            doi = None
+            doi_pattern = r'10.\d{4,9}/[-._;()/:A-Z0-9]+'
+            doi_match = re.search(doi_pattern, item['pub_url'])
+
+            if doi_match:
+                doi = doi_match.group()
+                print(f"DOI: {doi}")
+            else:
+                print("DOI not found in the URL.")\
+            
+            sci_hub_url = ""
+            try:
+                sci_hub_url = SCI_HUB + "?doi="+doi
+            except TypeError:
+                sci_hub_url = ""
+            # adding the article to the list
+            scholar_objects.append({'name': item['bib']['title'], 'source': 'Google Scholar', 'url': item['pub_url'], 'sci_hub': sci_hub_url, 'abstract': item['abstract']})
+            articles += 1
+        except:
+            continue
+
+    data = {'query': query, 'objects': (scholar_objects)}
+    print(data)
+    json_data = json.loads(json.dumps(data))
+
+    return render_template('search.html', data=json_data)
+
 @app.route("/pubchem")
 def pubchem():
     return render_template("pubchem.html", data={"query": request.args["query"]})
 
 @app.route("/pubmed")
-def pubchem():
+def pubmed():
     return render_template("pubmed.html", data={"query": request.args["query"]})
 
-@app.route("/pubsci")
-def pubchem():
-    return render_template("pubsci.html", data={"query": request.args["query"]})
+@app.route("/scipub")
+def pubsci():
+    return render_template("scipub.html", data={"query": request.args["query"]})
 
+@app.route("/sci-hub")
+def scihub():
+    return render_template("scihub.html", data={"doi": request.args["doi"]})
+
+#results = scholarly.search_pubs("machine learning")
+# for i in results:
+#     print(i['bib']['title'])
+    
 app.run(host="0.0.0.0", port="3000")
