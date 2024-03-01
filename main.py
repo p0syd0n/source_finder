@@ -102,7 +102,7 @@ def pubchem():
 @app.route("/pubmed")
 def pubmed():
     #return render_template("pubmed.html", data={"query": request.args["query"]})
-    return redirect(f"https://pubmed.ncbi.nlm.nih.gov/?term={request.args["query"]}")
+    return redirect(f"https://pubmed.ncbi.nlm.nih.gov/?term={request.args['query']}")
 
 @app.route("/scipub")
 def pubsci():
