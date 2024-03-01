@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 import os
 from bs4 import BeautifulSoup
 import requests
@@ -7,7 +7,7 @@ from scholarly import scholarly
 import re
 
 app = Flask(__name__)
-SCI_HUB = '/sci-hub' # 'https://sci-hub.yncjkj.com/'
+SCI_HUB = '/scihub' # 'https://sci-hub.yncjkj.com/'
 SCHOLAR_MAX = 10
 
 def search(query):
@@ -33,7 +33,8 @@ def main():
 @app.route('/search')
 def search_():
     engine = request.args["engine"]
-    return "test"
+    query = request.args["query"]
+    return redirect(f"/{engine}?query={query}")
 
 @app.route('/blend')
 def blend():
@@ -94,13 +95,14 @@ def pubchem():
 
 @app.route("/pubmed")
 def pubmed():
-    return render_template("pubmed.html", data={"query": request.args["query"]})
+    #return render_template("pubmed.html", data={"query": request.args["query"]})
+    return redirect(f"https://pubmed.ncbi.nlm.nih.gov/?term={request.args["query"]}")
 
 @app.route("/scipub")
 def pubsci():
     return render_template("scipub.html", data={"query": request.args["query"]})
 
-@app.route("/sci-hub")
+@app.route("/scihub")
 def scihub():
     return render_template("scihub.html", data={"doi": request.args["doi"]})
 

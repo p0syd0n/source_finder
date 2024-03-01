@@ -1,8 +1,11 @@
+<script src="{{ url_for('static', filename='js/iframe.js') }}"></script>
 <iframe src="https://sci-hub.yncjkj.com/{{data.doi}}"
 frameborder="0" 
 marginheight="0" 
 marginwidth="0" 
 width="100%" 
+id="iFrame"
 height="100%" 
-scrolling="auto"> 
+scrolling="auto"
+onerror="redirectToIframeSrc()"> 
 </iframe> 

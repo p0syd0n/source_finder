@@ -16,7 +16,6 @@ form{
 }
 
 input {
-    margin-top: 20%;
     background-color: #535A92;
     color: white;
     outline: none;
@@ -37,4 +36,55 @@ button {
     min-height: 100vh; /* Ensures the container takes up at least the full height of the viewport */
     
 }
+
+button {
+    margin-top: 5px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #181F58;
+    color: #535A92;
+    border: none; /* Remove default button border */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition for hover effects */
+    border-radius: 5px; /* Optional: Add rounded corners */
+}
+
+button:hover {
+    background-color: #2E3478; /* Darken the background color on hover */
+    transform: scale(1.05); /* Slightly scale up the button */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+}
+
+button:active {
+    transform: scale(0.95); /* Slightly scale down the button when clicked */
+}
+
+input[type='radio'] {
+    appearance: none;
+    -webkit-appearance: none;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: #fff;
+    border: 2px solid #535A92;
+    border-radius: 50%;
+    vertical-align: -3px;
+    cursor: pointer;
+   }
+   
+   input[type='radio']:checked::before {
+    content: "";
+    display: block;
+    width: 10px;
+    height: 10px;
+    margin: 4px;
+    background-color: #535A92;
+    border-radius: 50%;
+   }
+   input[type='radio'] {
+    accent-color: #535A92;
+   }
+    
+   
 

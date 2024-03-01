@@ -6,11 +6,29 @@
     <body>
         <h1>SourceFinder</h1>
         <div class="form_container">
-            <form method="GET" action="/search">
-                <input id="input" name="query" placeholder="search. . ." autofocus></input>
+            <form id="searchForm" method="GET" action="/search">
                 <br>
+                <label>
+                    <input type="radio" name="engine" value="scipub"> SciPub
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="engine" value="pubmed"> PubMed (direct link)
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="engine" value="pubchem"> PubChem
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="engine" value="blend" checked> Blend
+                </label>
+                <br>
+                <input id="input" name="query" placeholder="search. . ." autofocus></input>
+
                 <button type="submit">Go</button>
             </form>
+            
         </div>
 
         <script src="{{ url_for('static', filename='js/index.js') }}"></script>
