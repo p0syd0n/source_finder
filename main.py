@@ -5,10 +5,16 @@ import requests
 import json
 from scholarly import scholarly
 import re
+import os
+from os.path import join, dirname
+from dotenv import load_dotenv
 
+dotenv_path = join(dirname(__file__), '.env')
+load_dotenv(dotenv_path)
 app = Flask(__name__)
 SCI_HUB = '/scihub' # 'https://sci-hub.yncjkj.com/'
 SCHOLAR_MAX = 10
+PORT = os.environ.get("PORT")
 
 def search(query):
     headers = {
@@ -110,4 +116,4 @@ def scihub():
 # for i in results:
 #     print(i['bib']['title'])
     
-app.run(host="0.0.0.0", port="3000")
+app.run(host="0.0.0.0", port=PORT)
