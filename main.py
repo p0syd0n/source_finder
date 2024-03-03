@@ -63,6 +63,8 @@ def blend():
 
     articles = 0
     for item in raw_scholar:
+        #console.log('')
+        print(f"Article: {item['bib']['title']}")
         if articles == SCHOLAR_MAX:
             break
         try:
@@ -76,7 +78,7 @@ def blend():
                 doi = doi_match.group()
                 print(f"DOI: {doi}")
             else:
-                print("DOI not found in the URL.")\
+                print("DOI not found in the URL.")
             
             sci_hub_url = ""
             try:
@@ -84,13 +86,15 @@ def blend():
             except TypeError:
                 sci_hub_url = ""
             # adding the article to the list
-            scholar_objects.append({'name': item['bib']['title'], 'source': 'Google Scholar', 'url': item['pub_url'], 'sci_hub': sci_hub_url, 'abstract': item['abstract']})
+            scholar_objects.append({'name': item['bib']['title'], 'source': 'Google Scholar', 'url': item['pub_url'], 'sci_hub': sci_hub_url, 'abstract': item['bib']['abstract']})
             articles += 1
-        except:
+        except Exception as e:
+            articles += 1
+            print(f"Errored out of this one. Reason: {e}")
             continue
 
     data = {'query': query, 'objects': (scholar_objects)}
-    print(data)
+    #print(data)
     json_data = json.loads(json.dumps(data))
 
     return render_template('search.html', data=json_data)

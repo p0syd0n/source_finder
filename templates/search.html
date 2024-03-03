@@ -5,15 +5,18 @@
     </head>
     <body>
         <h1>SourceFinder</h1>
+	<h1>Results for {{ data.query }}</h1>
+
+	<input placeholder="Search . . ." id="search" autofocus></input>
         <ul>
             {% for item in data.objects %}
                 <h2><a href="{{item.url}}">{{item.name}}</a></h2>
-                <h3>{{item.source}}</h3>
+                <h3>Source: {{item.source}}</h3>
                 {% if item.sci_hub != "": %}
 
                     <a href="{{item.sci_hub}}">Sci-Hub</a>
                 {% endif %}
-                <p>{{item.abstract}}</p>
+                <p>{{item.abstract}} . . .</p>
             {% endfor %}
         </ul>
 

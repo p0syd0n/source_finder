@@ -34,7 +34,7 @@ h3 {
 
 ul {
   list-style: none;
-  padding: 0;
+  padding-left: 20px;
   margin: 0;
 }
 
@@ -68,6 +68,11 @@ ul {
 
 .card a:hover {
   text-decoration: underline;
+}
+
+input {
+	margin-left: 20px;
+	outline: none;
 }
 
 /* Responsive Styles */
